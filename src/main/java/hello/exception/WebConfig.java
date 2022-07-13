@@ -1,5 +1,6 @@
 package hello.exception;
 
+import hello.exception.Interceptor.LogInterceptor;
 import hello.exception.filter.LogFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,15 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Bean
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LogInterceptor())
+                .order(1)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/css/**" , "*.ico" , "/error" , "/error-page/**");
+    }
+
+//    @Bean
     public FilterRegistrationBean logFilter(){
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new LogFilter()); // 등록할 필터를 지정한다.
