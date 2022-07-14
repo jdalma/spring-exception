@@ -14,6 +14,9 @@ public class ApiExceptionController {
         if(id.equals("ex")){
             throw new RuntimeException("API 예외 테스트 메세지 - RuntimeException");
         }
+        if(id.equals("bad")){
+            throw new IllegalArgumentException("잘못된 입력 값 - IllegalArgumentException");
+        }
 
         return new MemberDto(id , "hello !!!" + id);
     }
