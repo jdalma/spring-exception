@@ -3,6 +3,7 @@ package hello.exception;
 import hello.exception.Interceptor.LogInterceptor;
 import hello.exception.filter.LogFilter;
 import hello.exception.resolver.MyHandlerExceptionResolver;
+import hello.exception.resolver.UserHandlerExceptionResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
         // configureHandlerExceptionResolvers(..) 를 사용하면 스프링이 기본으로 등록하는 ExceptionResolver 가 제거되므로 주의,
         // extendHandlerExceptionResolvers 를 사용하자.
         resolvers.add(new MyHandlerExceptionResolver());
+        resolvers.add(new UserHandlerExceptionResolver());
     }
 
     //    @Bean
